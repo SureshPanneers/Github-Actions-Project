@@ -6,16 +6,13 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Java CI with Maven
+name: CICD Pipeline
 
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
-
 jobs:
-  build:
+  compile:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
@@ -29,8 +26,7 @@ jobs:
       run: mvn compile
   security-check:
     runs-on: self-hosted
-   # needs: compile
-
+    needs: compile
     steps:
     - uses: actions/checkout@v4
     - name: Trivy Installation
