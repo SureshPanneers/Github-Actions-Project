@@ -92,12 +92,12 @@ jobs:
         pollingTimeoutSec: 600
       env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ vars.SONAR_HOST_URL }}  
-          
-    - name: buils_docker_image_and_push:
-      runs-on: self-hosted
-      needs: build_project_and_sonar_scan
-      steps:
+          SONAR_HOST_URL: ${{ vars.SONAR_HOST_URL }}
+
+  buils_docker_image_and_push:
+    runs-on: self-hosted
+    needs: build_project_and_sonar_scan
+    steps:
     - uses: actions/checkout@v4
     - name: Download JAR artifact
       uses: actions/download-artifact@v4
@@ -120,6 +120,6 @@ jobs:
         context: .
         push: true
         tags: sureshpanneers/bankapp:latest
-        file: ./Dockerfile
+        file: ./Dockerfile          
           
-      
+    
